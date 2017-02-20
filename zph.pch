@@ -1,0 +1,222 @@
+//
+//  zph.pch
+//  zph
+//
+//  Created by 李龙 on 2016/12/21.
+//  Copyright © 2016年 李龙. All rights reserved.
+//
+#ifdef __OBJC__
+#ifndef zph_pch
+#define zph_pch
+#define DEMO_CALL 1
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//第三方
+
+#define HUDBACK_COLOR [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]//遮罩背景
+//textfiled提示文字颜色
+#define PLACEHODLE_COLOR    [UIColor colorWithRed:240/255.0 green:241/255.0 blue:245/255.0 alpha:0.7]
+
+#define BUTTON_COLOR    [UIColor colorWithRed:54/255.0 green:217/255.0 blue:162/255.0 alpha:1]
+#define BACKGROUND_COLOR [UIColor colorWithHexString:@"#EDF6FC"]
+//薪资字体颜色
+#define SALARY_COLOR [UIColor colorWithHexString:@"#E93429"]
+//职位字体颜色,NAVtitle颜色,职位详情公司名颜色
+#define JOBNAME_COLOR [UIColor colorWithHexString:@"#565656"]
+//公司名颜色,职位详情地址颜色
+#define COMPANY_COLOR   [UIColor colorWithHexString:@"#A5A5A5"]
+//分割线颜色
+#define LINE_COLOR  [UIColor colorWithRed: 220/255.0 green: 220/255.0 blue: 220/255.0 alpha: 1]
+//职位详情职位颜色
+#define JOBDETAIL_COLOR [UIColor colorWithHexString:@"#313131"]
+//职位详情薪水颜色
+#define SALAARYDETAIL_COLOR [UIColor colorWithHexString:@"#02C084"]
+//职位详情头部下分割线
+#define TOPLINE_COLOR [UIColor colorWithHexString:@"#EDF6FC"]
+//企业详情公司介绍字体颜色
+#define COMPANYINT_COLOR    [UIColor colorWithHexString:@"#848484"]
+
+//忘记密码颜色
+#define FORGETPASW  [UIColor colorWithHexString:@"#E93429"]
+
+//验证码，协议字体颜色
+#define VERFIY_COLOR    [UIColor colorWithHexString:@"#02C084"]
+//必填字样
+#define BITIAN_COLOR    [UIColor colorWithHexString:@"#F95968"]
+
+//等待面试
+#define WAITEINTER_COLOR [UIColor colorWithHexString:@"#F19149"]
+
+
+//字体大小
+#define TITLE_FONT  [myFont textFont:15.0f]
+
+
+#import "AppDelegate.h"
+#import <ChameleonFramework/Chameleon.h>//颜色库
+#import "myFont.h"
+#import <Masonry.h>//autolayout
+#import "AFNetworking.h"
+#import "HttpRequestModel.h"
+#import "BaseButton.h"
+#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "MBProgressHUD.h"//遮罩
+#import "HUDProgress.h"
+#import "EaseUI.h"
+#import "MJRefresh.h"
+#import <Hyphenate/Hyphenate.h>
+#import "DemoCallManager.h"
+
+//
+//  接口定义
+//
+#define INTERFACE_URL       @"https://debug.211zph.com/webapi/v1"//测试服务器地址
+
+
+
+//登录注册接口
+#define LOGOIN              @"/account/login"
+//忘记密码接口
+#define CHANGEPASS          @"/account/updateAccount"
+//修改密码接口
+#define UPDATEPASS          @"/home/student/updateAccount"
+//获取验证码接口 mobilePhone：手机号
+#define GETverifyCode       @"/register/verifyCode"
+//已注册用户获取验证码
+#define ACCOUNTVERIFY       @"/account/verifyCode"
+//手机号创建账号获取token
+#define GETTOKEN            @"/register/createAccount"
+
+//上传头像接口
+#define UPLOADHEADIMAGE     @"/files/upload/headpic/base64"
+//头像Gzip后上传接口
+#define UPLOADWITHGZIP      @"/files/zipupload/headpic/base64"
+//注册学生接口
+#define REGISTSTUDENT       @"/register/student"
+//注册填写学历信息
+#define REGISTEDUCATION     @"/register/student/education"
+//注册期望职位
+#define REGISTEXPECTJOB     @"/register/student/position"
+//注册工作经历接口
+#define REGISTJOBEXPERIENCE @"/register/student/work"
+
+
+//职位详情
+#define  GETJOBDETAIL       @"/companyRecruit/find"//一条职位详情 job_id:岗位id
+#define  JOBSEARCH          @"/companyRecruit/search"//首页职业搜索 jobname:职位名
+//包含某职位的招聘会
+#define  POSITIONJOBFAIR    @"/companyRecruit/positionJobfair"
+
+//收藏职位
+#define RECRUITADD          @"/collect/recruitAdd"
+//收藏招聘会
+#define JOBFAIRADD          @"/collect/jobfairAdd"
+
+//投递简历
+#define SENDRESUME          @"/send/resume"
+//网络招聘会
+#define  GETNETJOB          @"/jobfair/netcongress"//获取网络招聘会列表
+//校园招聘会
+#define GETSCHOOLIST        @"/jobfair/multiple"//获取校园招聘会列表
+//校园招聘会参会企业列表
+#define GETSCHOOLJOBCOMPANY @"/company/jobfairCompany"
+//获取企业详情
+#define GETCOMPANYDETAIL    @"/company/find"
+//企业详情下招聘职位
+#define GETCOMPANYJOBLIST   @"/company/CompanyInfo"
+
+//招聘大厅职位列表
+#define GETJOBLIST_DATING   @"/netcongress/companyjobsList"
+//招聘会大厅弹幕滚动
+#define GETDANMU            @"/netcongress/lastestLog"
+//招聘大厅招聘会信息
+#define GETFAIRDETAIL       @"/netcongress/jobfairInfo"
+
+
+//个人中心接口
+#define GETPERSONAL         @"/home/student/stuCenter"
+//个人中心-意见反馈接口
+#define OPINION             @"/home/student/opinion"
+//我的简历-个人信息
+#define STUSTUDENT          @"/home/student/stuStudent"
+//编辑我的简历-个人信息
+#define UPDATESTU           @"/home/student/updateStu"
+//我的简历-教育背景
+#define STUEDUCATION        @"/home/student/stuEducation"
+//我的简历-编辑教育背景
+#define UPDATEEDU           @"/home/student/updateEdu"
+//我的简历-求职意向
+#define STUHOPE             @"/home/student/stuHope"
+//我的简历-修改求职意向
+#define UPDATEHOPE          @"/home/student/updateHope"
+//我的简历-工作经历
+#define STUWORK             @"/home/student/stuWork"
+//我的简历-编辑工作经历
+#define UPDATEWORK          @"/home/student/updateWork"
+//我的简历-删除接口
+#define STUDELETE           @"/home/student/stuDelete"
+
+//我的投递接口
+#define STUSEND             @"/home/student/stuSend"
+
+//我的收藏-招聘会列表
+#define JOBFAIRLIST         @"/collect/jobfairList"
+//我的收藏-职位列表
+#define RECRUITLIST         @"/collect/recruitList"
+
+//招聘会详情
+#define  GETfairDETAIL      @"/jobfair/find"    //获取招聘会详情
+
+//搜索招聘会
+#define SEARCHJOBFAIR       @"/jobfair/select"  //搜索招聘会 job_fair_name:招聘会名称
+
+//获取省信息
+#define GETADDRESS          @"/options/area/query"
+
+//获取学历
+#define GETEDUCTION         @"/options/education"
+
+//图片下载地址
+#define IMAGEUPLOAD         @"https://debug.211zph.com/webapi/v1/files/d/server/"
+//头像下载地址
+#define HEADDOWNLOAD        @"https://debug.211zph.com/webapi/v1/files/d/headpic/"
+//头像图片上传地址
+#define UPLOADIMAGE         @"https://debug.211zph.com/webapi/v1/files/d/headpic/"
+
+
+//首页职位列表
+#define GETjobsList         @"/companyRecruit/jobsList"
+//热门职位
+#define HOTJOBSEARCH        @"/companyRecruit/hotPosition"
+//首页广告列表
+#define GETadvert           @"/advertisement/advertIndex"
+
+
+//用于进行textfield输入模式判断
+#define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+#define kAlpha      @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+
+#define kNumbers     @"0123456789"
+
+#define kNumbersPeriod  @"0123456789."
+
+
+//极光推送appkey
+#define JPUSHKEY    @"0356d42132681a1c46f8da62"
+//友盟APPKEY
+#define UMAPPKEY    @"585cc0208f4a9d39dc001134"
+//环信IMAPPKEY
+#define EMAPPKEY    @"1149161212115654#211zph"
+//微信APPkey
+#define WEIAPPKEY   @"wxdc1e388c3822c80b"
+//微信appSecret
+#define WEISECRET   @"3baf1193c85774b3fd9d18447d76cab0"
+//qqAppkey
+#define QQAPPKEY    @"100424468"
+
+
+#endif /* zph_pch */
+#endif
