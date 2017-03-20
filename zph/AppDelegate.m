@@ -42,8 +42,8 @@
     
     [[EMClient sharedClient] addDelegate:self delegateQueue:nil];
     
-    
-    //你好
+
+    //年后
     //打开调试日志
     [[UMSocialManager defaultManager] openLog:YES];
     
